@@ -1,0 +1,35 @@
+name: Publish AIScoutLab Post
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 13 * * *"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - run: npm install
+
+      - run: |
+          node publish-beehiiv-post.js "./input/hero.png" \
+          "Daily AI Signal - $(date +'%Y-%m-%d')" \
+          "Daily AI signals for operators" \
+          "Auto-generated summary" \
+          "AI companies are still competing on models.
+
+          But workflow is where retention gets built.
+          And retention is where pricing power comes from."
+        env:
+          BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}
+          BEEHIIV_PUBLICATION_ID: ${{ secrets.BEEHIIV_PUBLICATION_ID }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
