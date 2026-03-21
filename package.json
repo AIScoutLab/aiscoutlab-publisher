@@ -1,0 +1,11 @@
+{
+  "name": "aiscoutlab-publisher",
+  "version": "1.0.0",
+  "main": "publish-beehiiv-post.js",
+  "dependencies": {
+    "sharp": "^0.33.0",
+    "cloudinary": "^1.41.0",
+    "dotenv": "^16.4.0",
+    "slugify": "^1.6.6"
+  }
+}
